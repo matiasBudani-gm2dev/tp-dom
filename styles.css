@@ -1,0 +1,27 @@
+dialog{
+    margin: 0;
+    padding: 0;
+    border: 0
+}
+
+th {
+    text-align: left;
+}
+
+#create-trip-modal {
+    box-sizing: border-box;
+    display: none;
+    position: fixed;
+    top: 10%;
+    left: 80%;
+    border: 1px solid black;
+    padding: 16px
+}
+
+#show-create-trip{
+    display: none;
+}
+
+#show-create-trip:checked ~ #create-trip-modal{
+    display: block;
+}
