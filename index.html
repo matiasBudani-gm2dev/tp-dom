@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <main>
+        <input type="checkbox" id="show-create-trip" >
+        <label for="show-create-trip">Create trip</label>
+        <dialog id="create-trip-modal">
+            <div id="content-modal">
+                <h2>Create a new trip</h2>
+                <p>Trip name *</p>
+                <input type="text" id="new-trip-name">
+
+                <label for="show-create-trip">Cancel</label>
+                <button onclick="addTrip()">Create</button>
+            </div>
+        </dialog>
+        <table id="trips-table">
+            <thead>
+                <tr>
+                    <th>Trip Name</th>
+                    <th>Client Name</th>
+                    <th>Travel Dates</th>
+                    <th>Total Amount</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>   
+            </thead>
+            <tbody id="trips-table-data">
+                <tr>
+                    <td>Honyemoon Miami</td>
+                    <td>Bob Jones</td>
+                    <td>May 24, 2025 - Jul 22,2025</td>
+                    <td>$13,959.49</td>
+                    <td>Active Booking</td>
+                    <td>
+                        <button>Update</button>
+                        <button>Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Paris getaway</td>
+                    <td>-</td>
+                    <td>May 24, 2025 - Jul 22,2025</td>
+                    <td>$13,959.49</td>
+                    <td>Active Booking</td>
+                    <td>
+                        <button>Update</button>
+                        <button >Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Cancún Family</td>
+                    <td>-</td>
+                    <td>May 24, 2025 - Jul 22,2025</td>
+                    <td>$13,959.49</td>
+                    <td>Quoting</td>
+                    <td>
+                        <button>Update</button>
+                        <button>Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+<script src="prueba.js"></script>
+</body>
+</html>
