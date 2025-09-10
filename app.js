@@ -153,4 +153,5 @@ function editTrip(indice = currentTripId){
 
     localStorage.setItem("trips", JSON.stringify(trips))
 
+    location.reload();
 }
