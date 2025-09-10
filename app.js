@@ -126,10 +126,10 @@ function addTrip(){
 
     console.log(table.innerHTML)
 }
-
+// No cuenta con validaciones de datos
 function editTrip(indice = currentTripId){
     console.log("indice:", indice);
-    console.log("typeof indice:", typeof indice); // debe ser 'number' o string convertible a número
+    console.log("typeof indice:", typeof indice);
     console.log("trips[indice]:", trips[indice]);
 
     const newTripName = document.getElementById("edit-trip-name").value
@@ -143,6 +143,7 @@ function editTrip(indice = currentTripId){
     console.log(trips)
     console.log(trips[indice])
 
+    //Solo aniade los campos que se pueden cambiar
     trips[indice] = {
         "trip name" : newTripName,
         "client name" : newClientName,
@@ -158,9 +159,7 @@ function editTrip(indice = currentTripId){
 
 function deleteTrip(indice){
 
-    const index = trips.findIndex(trip => trip.id === indice); // o == si `id` es string
-
-    // Asumís que el ID siempre existe
+    const index = trips.findIndex(trip => trip.id === indice); 
     trips.splice(index, 1);
     localStorage.setItem("trips", JSON.stringify(trips));
 
