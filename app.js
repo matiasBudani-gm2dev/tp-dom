@@ -1,4 +1,9 @@
 let trips;
+
+let currentTripId = null;
+
+const table = document.getElementById("trips-table-data")
+
 if (!localStorage.getItem("trips")) {
   // No existe, así que la guardamos
   trips = []
@@ -10,53 +15,58 @@ if (!localStorage.getItem("trips")) {
   trips = JSON.parse(trips)
 }
 
+refreshTable()
+
 function mostrarNullComoRaya(valor){
     if(valor == ''){
         return "-"
     }
 }
+function refreshTable(){
+    for(let i = trips.length-1; i >= 0; i--){
+        const fila = document.createElement("tr")
 
-const table = document.getElementById("trips-table-data")
-for(let i = trips.length-1; i >= 0; i--){
-    console.log(trips[i])
-    const fila = document.createElement("tr")
+        const celdaName = document.createElement("td")
+        celdaName.textContent = trips[i]["trip name"]
+        fila.appendChild(celdaName)
 
-    const celdaName = document.createElement("td")
-    celdaName.textContent = trips[i]["trip name"]
-    fila.appendChild(celdaName)
+        let celdaClientName = document.createElement("td")
+        celdaClientName.textContent = trips[i]["client name"]
+        celdaClientName.textContent = mostrarNullComoRaya(celdaClientName.textContent)
+        fila.appendChild(celdaClientName)
 
-    let celdaClientName = document.createElement("td")
-    celdaClientName.textContent = trips[i]["client name"]
-    celdaClientName.textContent = mostrarNullComoRaya(celdaClientName.textContent)
-    fila.appendChild(celdaClientName)
+        let celdaTravelDates = document.createElement("td")
+        celdaTravelDates.textContent = trips[i]["travel dates"]
+        celdaTravelDates.textContent = mostrarNullComoRaya(celdaTravelDates.textContent)
+        fila.appendChild(celdaTravelDates)
 
-    let celdaTravelDates = document.createElement("td")
-    celdaTravelDates.textContent = trips[i]["travel dates"]
-    celdaTravelDates.textContent = mostrarNullComoRaya(celdaTravelDates.textContent)
-    fila.appendChild(celdaTravelDates)
+        let celdaTotalAmount = document.createElement("td")
+        celdaTotalAmount.textContent = trips[i]["total amount"]
+        celdaTotalAmount.textContent = mostrarNullComoRaya(celdaTotalAmount.textContent)
+        fila.appendChild(celdaTotalAmount)
+        
 
-    let celdaTotalAmount = document.createElement("td")
-    celdaTotalAmount.textContent = trips[i]["total amount"]
-    celdaTotalAmount.textContent = mostrarNullComoRaya(celdaTotalAmount.textContent)
-    fila.appendChild(celdaTotalAmount)
-    
+        const celdaStatus = document.createElement("td")
+        celdaStatus.textContent = trips[i]["status"]
+        fila.appendChild(celdaStatus)
 
-    const celdaStatus = document.createElement("td")
-    celdaStatus.textContent = trips[i]["status"]
-    fila.appendChild(celdaStatus)
+        const celdaActions = document.createElement("td")
+        const nextId = trips.length > 0 ? trips[trips.length - 1].id + 1 : 0;
+        celdaActions.innerHTML = `
+        <button onclick="showEditTrip(${i})" "data-id="${i}">Update</button>
+        <button>Delete</button>   
+        `
+        fila.appendChild(celdaActions)
+        
+        table.appendChild(fila)
+    }
+}
 
-    const celdaActions = document.createElement("td")
-    celdaActions.innerHTML = `
-    <button>Update</button>
-    <button>Delete</button>  
-    `
-    fila.appendChild(celdaActions)
-    
-    table.appendChild(fila)
-    console.log(table)
-};
-
-
+function showEditTrip(id){
+    const checkbox = document.getElementById("show-edit-trip");
+    checkbox.checked = !checkbox.checked
+    currentTripId = id
+}
 
 function addTrip(){
     const errorExiste = document.getElementById("mensaje-error")
@@ -76,6 +86,8 @@ function addTrip(){
     const celda = document.createElement('td');
     celda.textContent = tripName
     nuevaFila.appendChild(celda)
+
+    // aniadir "-" a campos name cliente, travel dates y total amount
     for(let i=0; i <3; i++){   
         const celdasVacias = document.createElement('td')
         celdasVacias.textContent = "-"
@@ -88,7 +100,8 @@ function addTrip(){
     const nextId = trips.length > 0 ? trips[trips.length - 1].id + 1 : 0;
 
     celdaActions.innerHTML = `
-    <button data-id="${nextId}">Update</button>
+    <button onclick="showEditTrip(${nextId})" "data-id="${nextId}">Update</button>
+
     <button>Delete</button>  
     `
     nuevaFila.appendChild(celdaActions)
@@ -120,4 +133,30 @@ function addTrip(){
     localStorage.setItem("trips", JSON.stringify(trips))
 
     console.log(table.innerHTML)
+}
+
+function editTrip(id = currentTripId){
+
+    const newTripName = document.getElementById("edit-trip-name").value
+    const newClientName = document.getElementById("edit-first-name").value.trim() + " " + document.getElementById("edit-last-name").value.trim()
+    const newTravelDates = document.getElementById("edit-start-date").value.trim() + " " + document.getElementById("edit-end-date").value.trim()
+       
+    console.log(newTripName)
+    console.log(newClientName)
+    console.log(newTravelDates)
+
+    console.log(trips)
+    console.log(trips[id])
+
+    trips[id] = {
+        "trip name" : newTripName,
+        "client name" : newClientName,
+        "travel dates" : newTravelDates,
+        status : "Quoting"
+    }
+
+    localStorage.setItem("trips", JSON.stringify(trips))
+
+    refreshTable()
+    return trips 
 }

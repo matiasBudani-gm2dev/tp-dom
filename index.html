@@ -21,6 +21,62 @@
                 <button onclick="addTrip()">Create</button>
             </div>
         </dialog>
+
+
+
+        <input type="checkbox" id="show-edit-trip" >
+        <dialog id="edit-trip-modal">
+            <div id="edit-content-modal">
+                
+                <h2>Vie/Edit update trip</h2>
+                <div class="edit-inputs-data">
+                <div class="trip-name">
+                    <p>Trip name</p>
+                    <input type="text" id="edit-trip-name" required>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <p>Main traveler first name</p>
+                        <input type="text" id="edit-first-name" required>
+                    </div>
+                
+
+                    <div>
+                        <p>Main traveler last name</p>
+                        <input type="text" id="edit-last-name" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <p>Traveler Start date</p>
+                        <input type="text" id="edit-start-date" required>
+                    </div>
+        
+                    <div>
+                        <p>Traveler End date</p>
+                        <input type="text" id="edit-end-date" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <p>Total Amount (not editable)</p>
+                        <input type="text">
+                    </div>
+                    
+                    <div>
+                        <p>Status (not editable)</p>
+                        <input type="text">
+                    </div>
+                </div>
+
+                <label for="show-edit-trip">Cancel</label>
+                <button onclick="editTrip()">Edit</button>
+                </div>
+            </div>
+        </dialog>
         <table id="trips-table">
             <thead>
                 <tr>
@@ -33,39 +89,6 @@
                 </tr>   
             </thead>
             <tbody id="trips-table-data">
-                <tr>
-                    <td>Honyemoon Miami</td>
-                    <td>Bob Jones</td>
-                    <td>May 24, 2025 - Jul 22,2025</td>
-                    <td>$13,959.49</td>
-                    <td>Active Booking</td>
-                    <td>
-                        <button>Update</button>
-                        <button>Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Paris getaway</td>
-                    <td>-</td>
-                    <td>May 24, 2025 - Jul 22,2025</td>
-                    <td>$13,959.49</td>
-                    <td>Active Booking</td>
-                    <td>
-                        <button>Update</button>
-                        <button >Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Cancún Family</td>
-                    <td>-</td>
-                    <td>May 24, 2025 - Jul 22,2025</td>
-                    <td>$13,959.49</td>
-                    <td>Quoting</td>
-                    <td>
-                        <button>Update</button>
-                        <button>Delete</button>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </main>

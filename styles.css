@@ -8,6 +8,30 @@ th {
     text-align: left;
 }
 
+#edit-trip-modal{
+    box-sizing: border-box;
+    display: none;
+    position: fixed;
+    width: 400px;
+    height: 600px;
+    top: 35%;
+    left: 50%;
+    border: 1px solid black;
+    padding: 16px
+}
+
+#show-edit-trip{
+    display: none;
+}
+
+#show-edit-trip:checked ~ #edit-trip-modal{
+    display: block;
+}
+
+.row{
+    display: flex;
+}
+
 #create-trip-modal {
     box-sizing: border-box;
     display: none;
