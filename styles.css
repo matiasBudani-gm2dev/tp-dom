@@ -4,6 +4,10 @@ dialog{
     border: 0
 }
 
+table {
+    border-spacing: 10px 10px;
+}
+
 th {
     text-align: left;
 }
