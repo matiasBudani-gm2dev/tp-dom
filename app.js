@@ -17,11 +17,6 @@ if (!localStorage.getItem("trips")) {
 
 refreshTable()
 
-function mostrarNullComoRaya(valor){
-    if(valor == ''){
-        return "-"
-    }
-}
 function refreshTable(){
     for(let i = trips.length-1; i >= 0; i--){
         const fila = document.createElement("tr")
@@ -32,17 +27,14 @@ function refreshTable(){
 
         let celdaClientName = document.createElement("td")
         celdaClientName.textContent = trips[i]["client name"]
-        celdaClientName.textContent = mostrarNullComoRaya(celdaClientName.textContent)
         fila.appendChild(celdaClientName)
 
         let celdaTravelDates = document.createElement("td")
         celdaTravelDates.textContent = trips[i]["travel dates"]
-        celdaTravelDates.textContent = mostrarNullComoRaya(celdaTravelDates.textContent)
         fila.appendChild(celdaTravelDates)
 
         let celdaTotalAmount = document.createElement("td")
         celdaTotalAmount.textContent = trips[i]["total amount"]
-        celdaTotalAmount.textContent = mostrarNullComoRaya(celdaTotalAmount.textContent)
         fila.appendChild(celdaTotalAmount)
         
 
@@ -135,7 +127,10 @@ function addTrip(){
     console.log(table.innerHTML)
 }
 
-function editTrip(id = currentTripId){
+function editTrip(indice = currentTripId){
+    console.log("indice:", indice);
+    console.log("typeof indice:", typeof indice); // debe ser 'number' o string convertible a número
+    console.log("trips[indice]:", trips[indice]);
 
     const newTripName = document.getElementById("edit-trip-name").value
     const newClientName = document.getElementById("edit-first-name").value.trim() + " " + document.getElementById("edit-last-name").value.trim()
@@ -146,17 +141,16 @@ function editTrip(id = currentTripId){
     console.log(newTravelDates)
 
     console.log(trips)
-    console.log(trips[id])
+    console.log(trips[indice])
 
-    trips[id] = {
+    trips[indice] = {
         "trip name" : newTripName,
         "client name" : newClientName,
         "travel dates" : newTravelDates,
         status : "Quoting"
     }
 
+
     localStorage.setItem("trips", JSON.stringify(trips))
 
-    refreshTable()
-    return trips 
 }
