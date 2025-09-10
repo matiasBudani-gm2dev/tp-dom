@@ -46,7 +46,7 @@ function refreshTable(){
         const nextId = trips.length > 0 ? trips[trips.length - 1].id + 1 : 0;
         celdaActions.innerHTML = `
         <button onclick="showEditTrip(${i})" "data-id="${i}">Update</button>
-        <button>Delete</button>   
+        <button onclick="deleteTrip(${i})">Delete</button>   
         `
         fila.appendChild(celdaActions)
         
@@ -94,7 +94,7 @@ function addTrip(){
     celdaActions.innerHTML = `
     <button onclick="showEditTrip(${nextId})" "data-id="${nextId}">Update</button>
 
-    <button>Delete</button>  
+    <button onclick="deleteTrip(${nextId})">Delete</button>  
     `
     nuevaFila.appendChild(celdaActions)
 
@@ -152,6 +152,17 @@ function editTrip(indice = currentTripId){
 
 
     localStorage.setItem("trips", JSON.stringify(trips))
+
+    location.reload();
+}
+
+function deleteTrip(indice){
+
+    const index = trips.findIndex(trip => trip.id === indice); // o == si `id` es string
+
+    // Asumís que el ID siempre existe
+    trips.splice(index, 1);
+    localStorage.setItem("trips", JSON.stringify(trips));
 
     location.reload();
 }
